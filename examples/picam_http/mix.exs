@@ -7,6 +7,7 @@ defmodule PicamHTTP.Mixfile do
      elixir: "~> 1.4",
      build_embedded: Mix.env == :prod,
      start_permanent: Mix.env == :prod,
+     target: :host,
      deps: deps()]
   end
 

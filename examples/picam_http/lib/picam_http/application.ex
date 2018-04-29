@@ -6,10 +6,11 @@ defmodule PicamHTTP.Application do
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
 
+    camera = Application.get_env(:picam, :camera, Picam.Camera)
     port = Application.get_env(:picam_http, :port)
 
     children = [
-      worker(Picam.Camera, []),
+      worker(camera, []),
       Plug.Adapters.Cowboy.child_spec(:http, PicamHTTP.Router, [], [port: port]),
     ]
 

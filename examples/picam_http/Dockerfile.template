@@ -1,0 +1,13 @@
+FROM resin/%%RESIN_MACHINE_NAME%%-alpine
+
+WORKDIR /app
+ADD . /app
+
+RUN echo "https://nl.alpinelinux.org/alpine/edge/community" >> /etc/apk/repositories \
+    && apk --update add elixir && mix deps.get
+
+EXPOSE 4001
+
+CMD ["mix", "run"]
+
+ENTRYPOINT ["/usr/bin/elixir"]
